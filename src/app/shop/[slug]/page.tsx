@@ -4,7 +4,7 @@ import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const getProductBySlug = async (productSlug: string) => {
-  const res = await fetch(`http://localhost:3333/api/product/slug/${productSlug}`);
+  const res = await fetch(`${process.env.SERVER_URL}/api/product/slug/${productSlug}`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');

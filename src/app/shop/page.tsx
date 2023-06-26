@@ -2,7 +2,7 @@ import PageBanner from "../../components/page-banner";
 import ProductCard from "../../components/product-card";
 
 const getProducts = async () => {
-  const products = await fetch('http://localhost:3333/api/product');
+  const products = await fetch(`${process.env.SERVER_URL}/api/product`);
 
   return products.json();
 }

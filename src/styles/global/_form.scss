@@ -1,0 +1,73 @@
+.form {
+  font: 16px/1.2 "Inter", sans-serif;
+  font-weight: 500;
+
+  input {
+    background-color: #E2E8F0;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  label {
+    font-size: 16px;
+    color: #718096;
+  }
+  
+  &__row {
+    display: grid;
+    grid-column-gap: 40px;
+    
+    &--50 {
+      grid-template-columns: repeat(2, 1fr);
+      
+    }
+  }
+
+  &__group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin: 0 0 10px 0;
+    }
+  }
+  
+  &__group-results {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+    max-height: 350px;
+    overflow: auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+    
+    button {
+      width: 100%;
+      border: none;
+      background-color: transparent;
+      display: block;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-align: left;
+      
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  }
+  
+  &__select {
+    background-color: #E2E8F0;
+  }
+
+}

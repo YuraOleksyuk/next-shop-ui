@@ -1,0 +1,19 @@
+.cd-btn {
+  display: inline-block;
+  padding: 20px 50px;
+  font: 16px/1 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  
+  &--primary {
+    background-color: #3182CE;
+    color: #F7FAFC;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+    transition: box-shadow .3s;
+    
+    &:hover {
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, .4);
+    }
+  }
+}

@@ -1,4 +1,4 @@
-Live demo -> [next-shop-ui.vercel.app]([https://nextjs.org/](https://next-shop-ui.vercel.app/)).
+Live demo -> [next-shop-ui.vercel.app](https://next-shop-ui.vercel.app/).
 
 ## Getting Started
 

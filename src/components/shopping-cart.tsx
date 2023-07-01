@@ -1,12 +1,17 @@
 "use client";
 
 import {useDispatch, useSelector} from "react-redux";
-import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
+import { RootState } from "@/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react";
-import { incrementShoppingCartItemQuantity, decrementShoppingCartItemQuantity } from "../store";
+import {useEffect, useState} from "react";
+import {
+  incrementShoppingCartItemQuantity,
+  decrementShoppingCartItemQuantity,
+  setShoppingCart
+} from "@/store/slices/shoppingCartSlice";
 import Link from "next/link";
+import {loadFromLocalStorage} from "@/utils/local-storage";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -24,7 +29,12 @@ const ShoppingCart = () => {
     dispatch(decrementShoppingCartItemQuantity(productId));
   }
 
-  const shoppingCartItems: any = useSelector((state: RootState<any, any, any>) => {
+  useEffect(() => {
+    const shoppingCartProducts = loadFromLocalStorage('shoppingCartState') || []
+    dispatch(setShoppingCart(shoppingCartProducts))
+  }, [])
+
+  const shoppingCartItems: ShoppingCart[] = useSelector((state: RootState) => {
     return state.shoppingCart;
   });
 

@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import {FormEvent, ReactNode, useState} from "react";
-import { addShoppingCartItem } from "@/store";
+import { addShoppingCartItem } from "@/store/slices/shoppingCartSlice";
 import styled from "styled-components";
 
 const AddToCardBtn = styled.button<{ $size: string; }>`
@@ -69,7 +69,7 @@ const AddToCard = ({ product, size = "lg", children }: {product: Product, size: 
   return (
     <form id="qty"onSubmit={handleSubmit}>
       {size == 'lg' && (
-        <input type="number" min="0" name="qty" value={quantity ? quantity : ''} onChange={e => handleQuantityChange(e.target.value)} className="form-control" aria-describedby="quantity"/>
+        <input type="number" min="0" name="qty" value={quantity ? quantity : ''} onChange={e => handleQuantityChange(e.target.value)} className="form-control"/>
       )}
       <AddToCardBtn $size={size} type="submit">
         {children}

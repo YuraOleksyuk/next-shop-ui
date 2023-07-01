@@ -1,56 +1,29 @@
 'use client';
 
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import {configureStore, Middleware} from "@reduxjs/toolkit";
 
-const initialState: ShoppingCart[] = [];
+import shoppingCartReducer from './slices/shoppingCartSlice';
+import checkoutReducer from "@/store/slices/checkoutSlice";
+import {saveToLocalStorage} from "@/utils/local-storage";
 
-const shoppingCartSlice = createSlice({
-  name: 'shoppingCart',
-  initialState,
-  reducers: {
-    addShoppingCartItem(state, action: { payload: ShoppingCart }) {
-      const isProductInShoppingCart = state.findIndex((cartItem) => cartItem.product.id === action.payload.product.id);
+const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
+  const result = next(action);
 
-      if (isProductInShoppingCart < 0) {
-        state.push(action.payload);
-      } else {
-        state[isProductInShoppingCart].quantity = state[isProductInShoppingCart].quantity + action.payload.quantity;
-      }
-    },
-    removeShoppingCartItem(state, action) {
-
-    },
-    incrementShoppingCartItemQuantity(state, action: { payload: string }) {
-      const cartItemFilteredIndex =  state.findIndex((cartItem) => cartItem.product.id === action.payload);
-
-      if (cartItemFilteredIndex >= 0) {
-        state[cartItemFilteredIndex].quantity = state[cartItemFilteredIndex].quantity + 1;
-      }
-    },
-    decrementShoppingCartItemQuantity(state, action: { payload: string }) {
-      const cartItemFilteredIndex =  state.findIndex((cartItem) => cartItem.product.id === action.payload);
-
-      if (cartItemFilteredIndex >= 0) {
-        if (state[cartItemFilteredIndex].quantity > 1) {
-          state[cartItemFilteredIndex].quantity = state[cartItemFilteredIndex].quantity - 1;
-        } else {
-          state.splice(cartItemFilteredIndex, 1);
-        }
-      }
-    },
+  if (action.type?.startsWith('shoppingCart/') && action.type != 'shoppingCart/setShoppingCart') {
+    const shoppingCartState = store.getState().shoppingCart
+    saveToLocalStorage('shoppingCartState', shoppingCartState)
   }
-})
 
+  return result;
+}
 
 export const store = configureStore({
   reducer: {
-    shoppingCart: shoppingCartSlice.reducer
-  }
+    shoppingCart: shoppingCartReducer,
+    checkout: checkoutReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware)
 });
 
-export const {
-  addShoppingCartItem,
-  removeShoppingCartItem,
-  incrementShoppingCartItemQuantity,
-  decrementShoppingCartItemQuantity,
-} = shoppingCartSlice.actions;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

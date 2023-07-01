@@ -1,35 +1,39 @@
 'use client';
 
-import PageBanner from "../../components/page-banner";
 import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import ContactInformation from "../../components/checkout/contact-information";
-import Shipping from "../../components/checkout/shipping";
-import Payment from "../../components/checkout/payment";
-import {useState} from "react";
 
-const checkoutProcess = [
-  {
-    title: 'Account',
-    nextStep: 'Shipping details',
-    component: <ContactInformation/>
-  },
-  {
-    title: 'Shipping',
-    nextStep: 'Payment',
-    component: <Shipping/>
-  },
-  {
-    title: 'Payment',
-    nextStep: 'Complete order',
-    component: <Payment/>
-  },
-]
+import PageBanner from "@/components/page-banner";
+import ContactInformation from "@/components/checkout/contact-information";
+import Shipping from "@/components/checkout/shipping";
+import Payment from "@/components/checkout/payment";
+
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
+import OrderSummary from "@/components/checkout/order-summary";
 
 export default function Checkout() {
-  const [currentCheckoutStep, setCurrentCheckoutStep] = useState(0);
 
-  const checkoutDevider = () => {
+  const currentCheckoutStep = useSelector((state: RootState) => {
+    return state.checkout.currentCheckoutStep
+  })
+
+  const checkoutSteps = useSelector((state: RootState) => state.checkout.checkoutSteps)
+
+  const getCurrentCheckoutStepComponent = () => {
+    switch (currentCheckoutStep) {
+      case 0:
+        return <ContactInformation/>
+      case 1:
+        return <Shipping/>
+      case 2:
+        return <Payment/>
+      default:
+        return <h1>Order completed</h1>
+    }
+  }
+
+  const checkoutDivider = () => {
     return (
       <div className="checkout__devider">
         <FontAwesomeIcon icon={faCircleCheck} />
@@ -37,30 +41,24 @@ export default function Checkout() {
     )
   }
 
-  // const getCurrent
-
   return (
     <>
       <PageBanner title="Checkout"/>
       <div className="checkout">
         <div className="checkout__main">
           <div className="checkout__nav">
-            {checkoutProcess.map((item, index) => (
-              <div className="checkout__nav-item" onClick={() => setCurrentCheckoutStep(index)} key={index}>
+            {checkoutSteps.map((item: any, index: number) => (
+              <div className="checkout__nav-item" key={item.id}>
                 {item.title}
-                {index < checkoutProcess.length - 1 ? checkoutDevider() : '' }
+                {index < checkoutSteps.length - 1 ? checkoutDivider() : '' }
               </div>
             ))}
           </div>
-          {checkoutProcess[currentCheckoutStep].component}
-          
-          <div className="checkout__actions">
-            <button className="cd-btn">Cancel</button>
-            <button className="cd-btn cd-btn--primary">{checkoutProcess[currentCheckoutStep].nextStep}</button>
-          </div>
+          {getCurrentCheckoutStepComponent()}
+          {/*{checkoutProcess[currentCheckoutStep].component}*/}
         </div>
         <div className="checkout__summary">
-          <h2 className="text--md">Order summary</h2>
+          <OrderSummary/>
         </div>
       </div>
     </>

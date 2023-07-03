@@ -4,8 +4,6 @@ import {getProducts} from "@/utils/api";
 const SingleCategory = async ({ params }: { params: { slug: string } }) => {
   const products: Product[] = await getProducts(params.slug);
 
-  console.log('products > ', products)
-
   return (
     <>
       {products.map((product: Product) => (

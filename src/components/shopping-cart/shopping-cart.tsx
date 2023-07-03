@@ -21,7 +21,6 @@ const ShoppingCart = () => {
   }
 
   const handleCheckoutClick = (e: any, path: string) => {
-    console.log('handleCheckoutClick')
     setShoppingCartOpened(false)
     router.push(path)
   }

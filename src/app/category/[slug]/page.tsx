@@ -1,0 +1,17 @@
+import ProductCard from "@/components/product-card";
+import {getProducts} from "@/utils/api";
+
+const SingleCategory = async ({ params }: { params: { slug: string } }) => {
+  const products: Product[] = await getProducts(params.slug);
+
+  console.log('products > ', products)
+
+  return (
+    <>
+      {products.map((product: Product) => (
+        <ProductCard key={product.id} product={product}></ProductCard>
+      ))}
+    </>
+  )
+}
+export default SingleCategory

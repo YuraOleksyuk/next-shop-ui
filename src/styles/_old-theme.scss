@@ -13237,6 +13237,7 @@ Shop Page Style
   transition: all .3s;
   color: #000;
   background-color: transparent;
+  margin-bottom: 10px;
 }
 
 .trending-box .item .down-content .product-title:hover {
@@ -13362,7 +13363,7 @@ Single Page Style
   display: inline;
 }
 
-.single-product form button {
+/*.single-product form button {
   display: inline-block;
   height: 50px;
   line-height: 50px;
@@ -13383,7 +13384,7 @@ Single Page Style
 
 .single-product form button:hover {
   background-color: #0071f8;
-}
+}*/
 
 .single-product ul {
   margin-top: 60px;

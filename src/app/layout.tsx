@@ -1,9 +1,11 @@
 import '../styles/styles.scss';
-import Header from '../components/header';
 import {Providers} from '@/store/provider';
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
+
+import Header from '@/components/header';
+import Footer from "@/components/footer";
 
 library.add(fas)
 
@@ -19,6 +21,7 @@ export default function RootLayout({children}: { children: any }) {
     <Providers>
       <Header/>
       {children}
+      <Footer/>
     </Providers>
     </body>
     </html>

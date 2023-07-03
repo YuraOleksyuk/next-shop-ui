@@ -1,19 +1,26 @@
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   incrementCurrentCheckoutStep,
   setAccountData
 } from "@/store/slices/checkoutSlice";
 import Link from "next/link";
+import {RootState} from "@/store";
 
 const ContactInformation = () => {
   const dispatch = useDispatch();
+
+  const accountData = useSelector((state: RootState) => {
+    return state.checkout.accountData
+  })
 
   const {
     register,
     handleSubmit,
     formState: {errors, isDirty, isValid},
-  } = useForm();
+  } = useForm({
+    defaultValues: accountData
+  });
 
   const handleFormSubmit = handleSubmit((data) => {
     dispatch(setAccountData(data))

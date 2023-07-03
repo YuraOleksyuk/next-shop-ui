@@ -4,7 +4,7 @@ import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const getProductBySlug = async (productSlug: string) => {
-  const res = await fetch(`${process.env.SERVER_URL}/api/product/slug/${productSlug}`);
+  const res = await fetch(`${process.env.SERVER_URL}/api/product/slug/?slug=${productSlug}`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -12,14 +12,15 @@ const getProductBySlug = async (productSlug: string) => {
 
   return res.json();
 }
-export default async function singleProduct({ params }: { params: { slug: string } }) {
-  const product: Product = await getProductBySlug(params.slug);
 
-  /*if (!product) {
+export default async function singleProduct({ params }: { params: { slug: string } }) {
+  const product: Product = await getProductBySlug(params.slug) ?? null;
+
+  if (!product) {
     return {
       notFound: true, // redirect to 404
     }
-  }*/
+  }
 
   return (
     <main>

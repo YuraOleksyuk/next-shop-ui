@@ -9,7 +9,7 @@ const ProductCard = ({ product } : { product: Product }) => {
     <div className="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
       <div className="item">
         <div className="thumb">
-          <Link href={'/shop/' + product.slug}>
+          <Link href={'/product/' + product.slug}>
             {/*<Image loader={() => product.thumb} src={product.thumb} width={260} height={200} alt={"Hello"}/>*/}
             <img src={product.thumb} alt={product.title}/>
           </Link>
@@ -19,7 +19,7 @@ const ProductCard = ({ product } : { product: Product }) => {
           <span className="category">{product.category}</span>
           <h2 className="product-title">{product.title}</h2>
           {/*<button className="product-add-to-card">+</button>*/}
-          <AddToCard product={product} size={'sm'}>
+          <AddToCard product={product} size={'circle'}>
             <FontAwesomeIcon icon={faBagShopping} />
           </AddToCard>
         </div>

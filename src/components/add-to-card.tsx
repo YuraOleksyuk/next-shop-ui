@@ -3,57 +3,31 @@
 import { useDispatch } from "react-redux";
 import {FormEvent, ReactNode, useState} from "react";
 import { addShoppingCartItem } from "@/store/slices/shoppingCartSlice";
-import styled from "styled-components";
 
-const AddToCardBtn = styled.button<{ $size: string; }>`
-  display: inline-block;
-  height: 50px;
-  width: ${props => props.$size == 'sm' ? '50px' : 'auto'};
-  line-height: 50px;
-  background-color: #ee626b;
-  color: #fff;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: 500;
-  padding: ${props => props.$size == 'sm' ? '0 10px' : '0 25px'};;
-  border: none;
-  border-radius: 25px;
-  transition: all .3s;
+import {faBox, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-  ${(props) => {
-    switch (props.$size) {
-      case "sm":
-        return `background-color: yellow`;
-      case "lg":
-        return ``;
-      default:
-        return `background-color: yellow`;
-    }
-  }}
-
-  svg {
-    margin-right: ${props => props.$size == 'lg' ? '10px' : '0'};
-  }
-`;
-
-
-
-
-type AddToCartType = 'sm' | 'lg';
+type AddToCartType = 'sm' | 'lg' | 'circle';
 
 const AddToCard = ({ product, size = "lg", children }: {product: Product, size: AddToCartType, children: ReactNode[] | ReactNode }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const [buttonClicked, setButtonClicked] = useState(false)
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
+    setButtonClicked(true)
+
     dispatch(addShoppingCartItem({
       quantity,
       product
-    }));
+    }))
 
     setQuantity(1);
+    setTimeout(() => {
+      setButtonClicked(false)
+    }, 5000)
   }
 
   const handleQuantityChange = (quantity: string) => {
@@ -69,11 +43,19 @@ const AddToCard = ({ product, size = "lg", children }: {product: Product, size: 
   return (
     <form id="qty"onSubmit={handleSubmit}>
       {size == 'lg' && (
-        <input type="number" min="0" name="qty" value={quantity ? quantity : ''} onChange={e => handleQuantityChange(e.target.value)} className="form-control"/>
+        <input type="number"
+               min="0"
+               name="qty"
+               value={quantity ? quantity : ''}
+               onChange={e => handleQuantityChange(e.target.value)}
+        />
       )}
-      <AddToCardBtn $size={size} type="submit">
-        {children}
-      </AddToCardBtn>
+      <button disabled={buttonClicked} className={`button button--${size} ${buttonClicked ? 'button--clicked' : ''}`} type="submit">
+        <FontAwesomeIcon className="fa-shopping-cart" icon={faShoppingCart} />
+        <FontAwesomeIcon className="fa-box" icon={faBox} />
+        <span className="add-to-cart">Add to cart</span>
+        <span className="added">Added</span>
+      </button>
     </form>
   )
 }

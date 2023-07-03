@@ -74,6 +74,8 @@ $secondary-text-color: #909090;
 
   &__modal-main {
     padding: 0 32px;
+    max-height: calc(100vh - 280px);
+    overflow: auto;
   }
 
   &__item {
@@ -137,10 +139,10 @@ $secondary-text-color: #909090;
       }
     }
   }
-  
+
   &__modal-footer {
-    padding: 0 32px;
-    
+    padding: 0 32px 32px;
+
     .cd-btn {
       text-align: center;
       width: 100%;

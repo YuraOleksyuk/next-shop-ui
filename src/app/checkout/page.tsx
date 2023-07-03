@@ -48,7 +48,10 @@ export default function Checkout() {
         <div className="checkout__main">
           <div className="checkout__nav">
             {checkoutSteps.map((item: any, index: number) => (
-              <div className="checkout__nav-item" key={item.id}>
+              <div
+                key={item.id}
+                className={`checkout__nav-item ${currentCheckoutStep >= index ? 'checkout__nav-item--active' : ''}`}
+              >
                 {item.title}
                 {index < checkoutSteps.length - 1 ? checkoutDivider() : '' }
               </div>

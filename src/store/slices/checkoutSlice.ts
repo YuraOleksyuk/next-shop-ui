@@ -43,7 +43,7 @@ const checkoutSlice = createSlice({
     setAccountData(state, action) {
       state.accountData = action.payload
     },
-    setShippingData(state, { payload } : { payload: ShippingData }) {
+    setShippingData(state, {payload}: { payload: ShippingData }) {
       state.shippingData = payload
     }
   }
@@ -51,4 +51,9 @@ const checkoutSlice = createSlice({
 
 export default checkoutSlice.reducer
 
-export const { incrementCurrentCheckoutStep, setAccountData, setShippingData } = checkoutSlice.actions
+export const {
+  incrementCurrentCheckoutStep,
+  decrementCurrentCheckoutStep,
+  setAccountData,
+  setShippingData
+} = checkoutSlice.actions

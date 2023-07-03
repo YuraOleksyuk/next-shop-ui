@@ -9,6 +9,7 @@ import Select, {SingleValue} from "react-select";
 import {useDispatch} from "react-redux";
 import {
   incrementCurrentCheckoutStep,
+  decrementCurrentCheckoutStep,
   setShippingData
 } from "@/store/slices/checkoutSlice";
 
@@ -59,6 +60,10 @@ const Shipping = () => {
     dispatch(incrementCurrentCheckoutStep())
   }
 
+  const handleGoBackButton = () => {
+    dispatch(decrementCurrentCheckoutStep())
+  }
+
   return (
     <div className="shipping-details">
       <h2 className="text--md text--mb-30">Shipping details</h2>
@@ -90,7 +95,7 @@ const Shipping = () => {
           </div>
         </div>
         <div className="form__actions">
-          <button className="cd-btn">Cancel</button>
+          <button onClick={handleGoBackButton} className="cd-btn">Back to account details</button>
           <button className="cd-btn cd-btn--primary"
                   type="submit">Payment details
           </button>

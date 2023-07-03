@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ShoppingCart from "./shopping-cart";
+import ShoppingCart from "./shopping-cart/shopping-cart";
 
 const navLinks = [
   {
@@ -11,7 +11,7 @@ const navLinks = [
   },
   {
     title: "Our Shop",
-    href: '/shop',
+    href: '/category',
   },
   {
     title: "Contact Us",

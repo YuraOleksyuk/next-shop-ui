@@ -1,4 +1,4 @@
-Live demo -> [next-shop-ui.vercel.app](https://next-shop-ui.vercel.app/).
+Live demo -> [next-shop-ui-git-main-yura1a1.vercel.app](https://next-shop-ui-git-main-yura1a1.vercel.app/).
 
 ## Getting Started
 

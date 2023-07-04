@@ -6,6 +6,8 @@ import {fas} from '@fortawesome/free-solid-svg-icons'
 
 import Header from '@/components/header';
 import Footer from "@/components/footer";
+import {Suspense} from "react";
+import Loading from "@/app/loading";
 
 library.add(fas)
 
@@ -20,7 +22,9 @@ export default function RootLayout({children}: { children: any }) {
     <body>
     <Providers>
       <Header/>
-      {children}
+      <Suspense fallback={<Loading/>}>
+        {children}
+      </Suspense>
       <Footer/>
     </Providers>
     </body>

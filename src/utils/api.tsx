@@ -1,3 +1,5 @@
+import {notFound} from "next/navigation";
+
 export const getCategories = async () => {
   const categories = await fetch(`${process.env.SERVER_URL}/api/category`)
 
@@ -11,7 +13,17 @@ export const getProducts = async (categorySlug: string = '') => {
     endpointUrl = endpointUrl + `?categorySlug=${categorySlug}`
   }
 
-  const products = await fetch(endpointUrl)
+  const res = await fetch(endpointUrl)
 
-  return products.json()
+  console.log(res.status)
+
+  if (!res.ok) {
+    if (res.status == 404) {
+      notFound()
+    } else {
+      throw new Error('Failed to fetch data');
+    }
+  }
+
+  return res.json()
 }

@@ -15,8 +15,6 @@ export const getProducts = async (categorySlug: string = '') => {
 
   const res = await fetch(endpointUrl)
 
-  console.log(res.status)
-
   if (!res.ok) {
     if (res.status == 404) {
       notFound()

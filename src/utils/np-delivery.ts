@@ -1,4 +1,5 @@
 const apiKey: string = "89f3cb73bf4926af63229e4df685cb78"
+
 export const getCitiesByName = async (cityName: string): Promise<City[]> => {
     let npSettings = {
         apiKey: apiKey,
@@ -15,9 +16,9 @@ export const getCitiesByName = async (cityName: string): Promise<City[]> => {
         method: 'POST',
         body: JSON.stringify(npSettings)
     });
-    
+
     const citiesJson = await cities.json()
-    
+
     return citiesJson.data;
 }
 
@@ -37,9 +38,9 @@ export const getWarehouseByCityId = async (cityId: string) => {
         method: 'POST',
         body: JSON.stringify(npSettings)
     });
-    
+
     const warehousesJson = await warehouses.json()
-    
+
     return warehousesJson.data;
 }
 

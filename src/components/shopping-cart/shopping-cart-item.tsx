@@ -5,6 +5,7 @@ import {
   incrementShoppingCartItemQuantity
 } from "@/store/slices/shoppingCartSlice";
 import {useDispatch} from "react-redux";
+import {formatPrice} from "@/utils/product-utils";
 
 const ShoppingCartItem = ({ shoppingCartItem }: { shoppingCartItem: ShoppingCart }) => {
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ const ShoppingCartItem = ({ shoppingCartItem }: { shoppingCartItem: ShoppingCart
       <div className="shopping-cart__item-info">
         <h3 className="shopping-cart__item-title">{shoppingCartItem.product.title}</h3>
         <p className="shopping-cart__item-description">Lorem Ipsum is simply dummy text.</p>
-        <span>$ {shoppingCartItem.product.price}</span>
+        <span>{formatPrice(shoppingCartItem.product.price)}</span>
       </div>
       <div className="shopping-cart__controls">
         <button className="shopping-cart__controls-btn"

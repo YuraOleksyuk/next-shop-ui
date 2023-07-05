@@ -2,6 +2,7 @@ import Link from "next/link";
 import AddToCard from "./add-to-card";
 import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {formatPrice} from "@/utils/product-utils";
 // import Image from 'next/image';
 
 const ProductCard = ({ product } : { product: Product }) => {
@@ -13,7 +14,7 @@ const ProductCard = ({ product } : { product: Product }) => {
             {/*<Image loader={() => product.thumb} src={product.thumb} width={260} height={200} alt={"Hello"}/>*/}
             <img src={product.thumb} alt={product.title}/>
           </Link>
-          <span className="price">{product.price}</span>
+          <span className="price">{formatPrice(product.price)}</span>
         </div>
         <div className="down-content">
           <span className="category">{product.category}</span>

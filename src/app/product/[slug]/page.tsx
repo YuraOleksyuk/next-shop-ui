@@ -3,6 +3,7 @@ import AddToCard from "../../../components/add-to-card";
 import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {notFound} from "next/navigation";
+import {formatPrice} from "@/utils/product-utils";
 
 const getProductBySlug = async (productSlug: string) => {
   const res = await fetch(`${process.env.SERVER_URL}/api/product/slug/?slug=${productSlug}`);
@@ -35,7 +36,7 @@ export default async function singleProduct({ params }: { params: { slug: string
             </div>
             <div className="col-lg-6 align-self-center">
               <h4>{product.title}</h4>
-              <span className="price">{product.price}</span>
+              <span className="price">{formatPrice(product.price)}</span>
               <p>LUGX Gaming Template is based on the latest Bootstrap 5 CSS framework. This template is provided by TemplateMo and it is suitable for your gaming shop ecommerce websites. Feel free to use this for any purpose. Thank you.</p>
               <AddToCard product={product} size={'lg'}>
                 <FontAwesomeIcon icon={faBagShopping} />

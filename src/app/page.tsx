@@ -1,4 +1,5 @@
 import MainBanner from "../components/main-banner";
+import Image from "next/image";
 
 export default function Index() {
   return (
@@ -14,7 +15,7 @@ export default function Index() {
                 <a href="#">
                   <div className="item">
                     <div className="image">
-                      {/*<img src="assets/images/featured-01.png" alt="" style={{maxWidth: '44px'}} />*/}
+                      <Image src="/images/featured-01.png" alt="Free Storage" width={44} height={44}/>
                     </div>
                     <h4>Free Storage</h4>
                   </div>
@@ -24,7 +25,7 @@ export default function Index() {
                 <a href="#">
                   <div className="item">
                     <div className="image">
-                      {/*<img src="assets/images/featured-02.png" alt="" style={{maxWidth: '44px'}} />*/}
+                      <Image src="/images/featured-02.png" alt="User More" width={44} height={44}/>
                     </div>
                     <h4>User More</h4>
                   </div>
@@ -34,7 +35,7 @@ export default function Index() {
                 <a href="#">
                   <div className="item">
                     <div className="image">
-                      {/*<img src="assets/images/featured-03.png" alt="" style={{maxWidth: '44px'}} />*/}
+                      <Image src="/images/featured-03.png" alt="Reply Ready" width={44} height={44}/>
                     </div>
                     <h4>Reply Ready</h4>
                   </div>
@@ -44,7 +45,7 @@ export default function Index() {
                 <a href="#">
                   <div className="item">
                     <div className="image">
-                      {/*<img src="assets/images/featured-04.png" alt="" style={{maxWidth: '44px'}} />*/}
+                      <Image src="/images/featured-04.png" alt="Easy Layout" width={44} height={44}/>
                     </div>
                     <h4>Easy Layout</h4>
                   </div>

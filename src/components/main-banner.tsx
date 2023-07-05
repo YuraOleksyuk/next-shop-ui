@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type MainBannerProps = {
   suptitle: string,
   title: string,
@@ -24,7 +26,7 @@ const MainBanner = ({ suptitle, title, subtitle }: MainBannerProps) => {
           </div>
           <div className="col-lg-4 offset-lg-2">
             <div className="right-image">
-              <img src="assets/images/banner-image.jpg" alt=""/>
+              <Image src="/images/banner-image.jpg" width={400} height={487} alt=""/>
               <span className="price">$22</span>
               <span className="offer">-40%</span>
             </div>

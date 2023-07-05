@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import {useEffect, useState} from "react";
 import { setShoppingCart } from "@/store/slices/shoppingCartSlice";
-import Link from "next/link";
 import {loadFromLocalStorage} from "@/utils/local-storage";
 import ShoppingCartItem from "@/components/shopping-cart/shopping-cart-item";
 import {useRouter} from "next/navigation";
+import {calculateTotal, formatPrice} from "@/utils/product-utils";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -54,6 +54,7 @@ const ShoppingCart = () => {
             ))}
           </div>
           <div className="shopping-cart__modal-footer">
+            <span>Total: {formatPrice(calculateTotal(shoppingCartItems))}</span>
             <a className="cd-btn cd-btn--primary"
                   onClick={(e) => handleCheckoutClick(e, '/checkout')}>To order</a>
           </div>

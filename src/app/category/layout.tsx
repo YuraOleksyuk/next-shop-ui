@@ -1,6 +1,4 @@
 import PageBanner from "@/components/page-banner";
-import Link from "next/link";
-import {ReactElement} from "react";
 
 export default function CategoryLayout({ children } : { children: any }) {
   return (

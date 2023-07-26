@@ -1,4 +1,6 @@
-import {FormEvent, useState} from "react";
+'use client'
+
+import {FormEvent, useEffect, useState} from "react";
 import {
   getCitiesByName,
   formatCityName,
@@ -6,12 +8,13 @@ import {
 } from "@/utils/np-delivery";
 import AsyncSelect from "react-select/async";
 import Select, {SingleValue} from "react-select";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   incrementCurrentCheckoutStep,
   decrementCurrentCheckoutStep,
   setShippingData
 } from "@/store/slices/checkoutSlice";
+import {RootState} from "@/store";
 
 const Shipping = () => {
   const dispatch = useDispatch()
@@ -19,6 +22,17 @@ const Shipping = () => {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([])
   const [selectedWarehouseValue, setSelectedWarehouseValue] = useState<Warehouse | null>(null)
   const [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(null)
+
+  const shippingData = useSelector((state: RootState) => {
+    return state.checkout.shippingData
+  });
+
+  useEffect(() => {
+    setSelectedCityValue(shippingData.city);
+    setSelectedWarehouseValue(shippingData.warehouse);
+  }, []);
+
+  // console.log('shippingData >', shippingData)
 
   const loadOptions = async (inputValue: string) => {
     return new Promise<City[]>((resolve) => {
@@ -57,7 +71,9 @@ const Shipping = () => {
       warehouse: selectedWarehouseValue
     }))
 
-    dispatch(incrementCurrentCheckoutStep())
+    console.log("complete Order")
+
+    // dispatch(incrementCurrentCheckoutStep())
   }
 
   const handleGoBackButton = () => {
@@ -97,7 +113,7 @@ const Shipping = () => {
         <div className="form__actions">
           <button onClick={handleGoBackButton} className="cd-btn">Back to account details</button>
           <button className="cd-btn cd-btn--primary"
-                  type="submit">Payment details
+                  type="submit">Complete Order
           </button>
         </div>
       </form>

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -8,15 +8,24 @@ import ContactInformation from "@/components/checkout/contact-information";
 import Shipping from "@/components/checkout/shipping";
 import Payment from "@/components/checkout/payment";
 
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
 import OrderSummary from "@/components/checkout/order-summary";
+import {useEffect} from "react";
+import {loadFromLocalStorage} from "@/utils/local-storage";
+import {setCheckout} from "@/store/slices/checkoutSlice";
 
 export default function Checkout() {
+  const dispatch = useDispatch();
 
   const currentCheckoutStep = useSelector((state: RootState) => {
     return state.checkout.currentCheckoutStep
   })
+
+  useEffect(() => {
+    const checkoutData = loadFromLocalStorage('checkout');
+    dispatch(setCheckout(checkoutData));
+  }, [])
 
   const checkoutSteps = useSelector((state: RootState) => state.checkout.checkoutSteps)
 
@@ -26,8 +35,8 @@ export default function Checkout() {
         return <ContactInformation/>
       case 1:
         return <Shipping/>
-      case 2:
-        return <Payment/>
+      /*case 2:
+        return <Payment/>*/
       default:
         return <h1>Order completed</h1>
     }
@@ -58,7 +67,6 @@ export default function Checkout() {
             ))}
           </div>
           {getCurrentCheckoutStepComponent()}
-          {/*{checkoutProcess[currentCheckoutStep].component}*/}
         </div>
         <div className="checkout__summary">
           <OrderSummary/>

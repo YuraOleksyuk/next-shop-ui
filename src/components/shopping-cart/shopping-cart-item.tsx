@@ -1,3 +1,5 @@
+'use client';
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {
@@ -19,7 +21,7 @@ const ShoppingCartItem = ({ shoppingCartItem }: { shoppingCartItem: ShoppingCart
   }
 
   return (
-    <div className="shopping-cart__item" key={shoppingCartItem.product.id}>
+    <div className="shopping-cart__item">
       <div className="shopping-cart__item-img">
         <img
           src={shoppingCartItem.product.thumb}

@@ -21,10 +21,10 @@ const initialState: any = {
       id: 'shipping',
       title: 'Shipping',
     },
-    {
+    /*{
       id: 'payment',
       title: 'Payment',
-    },
+    },*/
   ],
   accountData: {},
   shippingData
@@ -40,6 +40,9 @@ const checkoutSlice = createSlice({
     decrementCurrentCheckoutStep(state) {
       state.currentCheckoutStep = state.currentCheckoutStep - 1
     },
+    setCheckout(state, action) {
+      return {...state, ...action.payload}
+    },
     setAccountData(state, action) {
       state.accountData = action.payload
     },
@@ -54,6 +57,7 @@ export default checkoutSlice.reducer
 export const {
   incrementCurrentCheckoutStep,
   decrementCurrentCheckoutStep,
+  setCheckout,
   setAccountData,
   setShippingData
 } = checkoutSlice.actions

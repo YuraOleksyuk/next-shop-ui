@@ -2,22 +2,10 @@ import PageBanner from "../../../components/page-banner";
 import AddToCard from "../../../components/add-to-card";
 import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {notFound} from "next/navigation";
 import {formatPrice} from "@/utils/product-utils";
+import {getProductBySlug} from "@/utils/api";
 
-const getProductBySlug = async (productSlug: string) => {
-  const res = await fetch(`${process.env.SERVER_URL}/api/product/slug/?slug=${productSlug}`);
 
-  if (!res.ok) {
-    if (res.status == 404) {
-      notFound()
-    } else {
-      throw new Error('Failed to fetch data');
-    }
-  }
-
-  return res.json();
-}
 
 export default async function singleProduct({ params }: { params: { slug: string } }) {
   const product: Product = await getProductBySlug(params.slug) ?? null;

@@ -12,6 +12,9 @@ const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   if (action.type?.startsWith('shoppingCart/') && action.type != 'shoppingCart/setShoppingCart') {
     const shoppingCartState = store.getState().shoppingCart
     saveToLocalStorage('shoppingCartState', shoppingCartState)
+  } else if (action.type.startsWith('checkout/')) {
+    const checkoutState = store.getState().checkout;
+    saveToLocalStorage('checkout', checkoutState);
   }
 
   return result;

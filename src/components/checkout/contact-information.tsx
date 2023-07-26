@@ -1,4 +1,6 @@
-import {useForm} from "react-hook-form";
+'use client'
+
+import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {
   incrementCurrentCheckoutStep,
@@ -6,20 +8,22 @@ import {
 } from "@/store/slices/checkoutSlice";
 import Link from "next/link";
 import {RootState} from "@/store";
+import PhoneInput, { isValidPhoneNumber, isPossiblePhoneNumber } from "react-phone-number-input";
 
 const ContactInformation = () => {
   const dispatch = useDispatch();
 
   const accountData = useSelector((state: RootState) => {
     return state.checkout.accountData
-  })
+  });
 
   const {
+    control,
     register,
     handleSubmit,
     formState: {errors, isDirty, isValid},
   } = useForm({
-    defaultValues: accountData
+    values: accountData
   });
 
   const handleFormSubmit = handleSubmit((data) => {
@@ -34,17 +38,26 @@ const ContactInformation = () => {
         <div className="form__main">
           <div className="form__group">
             <label htmlFor="phone">Phone</label>
-            <input
-              {...register("phone", {
-                required: "Phone is required",
-                minLength: {
-                  value: 10,
-                  message: "Phone number length is to short"
-                }
-              })}
-              type="tel"
-              autoComplete="on"
-              aria-invalid={errors.phone ? "true" : "false"}
+            <Controller
+              name="phone"
+              control={control}
+              rules={{
+                required: true,
+                validate: (value) => isPossiblePhoneNumber(value)
+              }}
+              render={({ field: { onChange, value } }) => (
+                <PhoneInput
+                  country="UA"
+                  defaultCountry="UA"
+                  value={value}
+                  name="phone"
+                  international={false}
+                  countryCallingCodeEditable={false}
+                  aria-invalid={errors.phone ? "true" : "false"}
+                  onChange={onChange}
+                  smartCaret={true}
+                />
+              )}
             />
           </div>
           <div className="form__group">
@@ -59,26 +72,28 @@ const ContactInformation = () => {
                 }
               )}
               type="email"
+              id="email"
               autoComplete="on"
               aria-invalid={errors.email ? "true" : "false"}
             />
-            <p></p>
           </div>
           <div className="form__row form__row--50">
             <div className="form__group">
-              <label htmlFor="first-name">First Name</label>
+              <label htmlFor="firstName">First Name</label>
               <input
                 {...register("firstName", {required: "First name is required"})}
                 type="text"
+                id="firstName"
                 autoComplete="on"
                 aria-invalid={errors.firstName ? "true" : "false"}
               />
             </div>
             <div className="form__group">
-              <label htmlFor="flast-name">Last Name</label>
+              <label htmlFor="lastName">Last Name</label>
               <input
                 {...register("lastName", {required: "Last name is required"})}
                 type="text"
+                id="lastName"
                 autoComplete="on"
                 aria-invalid={errors.lastName ? "true" : "false"}
               />
@@ -97,7 +112,6 @@ const ContactInformation = () => {
       </form>
     </div>
   )
-
 }
 
 export default ContactInformation

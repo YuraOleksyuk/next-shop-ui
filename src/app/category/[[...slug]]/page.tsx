@@ -1,12 +1,18 @@
 import ProductCard from "@/components/product-card";
-import {getCategories, getProducts} from "@/utils/api";
+import {
+  getCategories,
+  getProducts,
+  getProductsByCategorySlug
+} from "@/utils/api";
 
 import Link from "next/link";
 
 const SingleCategory = async ({params}: { params: { slug: [] } }) => {
-  const categorySlug = params.slug ? params.slug.join() : ''
-  const products: Product[] = await getProducts(categorySlug)
-  const categories: Category[] = await getCategories()
+  let categorySlug = params.slug ? params.slug.join() : '';
+  categorySlug = categorySlug.toLowerCase();
+
+  const products: Product[] = categorySlug ? await getProductsByCategorySlug(categorySlug) : await getProducts();
+  const categories: Category[] = await getCategories();
 
   return (
     <>

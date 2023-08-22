@@ -1,11 +1,29 @@
 .checkout {
   font-family: "Inter", sans-serif;
   max-width: 1320px;
+  width: 100%;
   padding: 50px 15px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 500px;
   grid-column-gap: 30px;
+
+  &__empty {
+    border-radius: 10px;
+    background: #F7FAFC;
+    padding: 37px 45px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin-bottom: 30px;
+    }
+  }
 
   &__main,
   &__summary {
@@ -67,4 +85,49 @@
     justify-content: flex-end;
     gap: 20px;
   }
+}
+
+.card-success {
+  text-align: center;
+
+  h1 {
+    color: #0271fa;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size:20px;
+    margin: 0;
+  }
+
+  i {
+    color: #0271fa;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left:-15px;
+  }
+
+  .card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  &__bg {
+    border-radius:200px;
+    height:200px;
+    width:200px;
+    background: #d7e8ff;
+    margin:0 auto;
+  }
+
+
 }

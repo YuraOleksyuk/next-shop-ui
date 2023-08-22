@@ -18,5 +18,9 @@ interface Warehouse {
     Delivery: object,
     Latitude: string,
     Longitude: string
-    
+}
+
+type ShippingData = {
+  city: City | null,
+  warehouse: Warehouse | null
 }

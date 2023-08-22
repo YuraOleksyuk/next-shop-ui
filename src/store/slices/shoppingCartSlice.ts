@@ -39,6 +39,10 @@ const shoppingCartSlice = createSlice({
         }
       }
     },
+    clearShoppingCart(state) {
+      // remove
+      return [];
+    },
   }
 })
 
@@ -48,6 +52,7 @@ export const {
   incrementShoppingCartItemQuantity,
   decrementShoppingCartItemQuantity,
   setShoppingCart,
+  clearShoppingCart
 } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer

@@ -10,4 +10,12 @@
 @import "components/shopping-cart";
 @import "components/cd-btn";
 @import "components/button";
+@import "components/progress-bar";
 @import "pages/checkout";
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

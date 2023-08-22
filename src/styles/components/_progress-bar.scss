@@ -1,0 +1,16 @@
+.progress-bar {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: all 1s;
+
+  progress {
+    visibility:hidden;
+    height:0;
+    width:0;
+  }
+}

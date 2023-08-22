@@ -1,14 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-type ShippingData = {
-  city: City | null,
-  warehouse: Warehouse | null
-}
-
-const shippingData: ShippingData = {
+export const SUCCESS_PAGE_TIMEOUT = 5000;
+export const shippingData: ShippingData = {
   city: null,
   warehouse: null
 }
+
+export const accountData: AccountData = {
+  phone: '',
+  email: '',
+  firstName: '',
+  lastName: ''
+};
 
 const initialState: any = {
   currentCheckoutStep: 0,
@@ -26,8 +29,8 @@ const initialState: any = {
       title: 'Payment',
     },*/
   ],
-  accountData: {},
-  shippingData
+  accountData,
+  shippingData,
 }
 
 const checkoutSlice = createSlice({
@@ -40,6 +43,9 @@ const checkoutSlice = createSlice({
     decrementCurrentCheckoutStep(state) {
       state.currentCheckoutStep = state.currentCheckoutStep - 1
     },
+    setCurrentCheckoutStep(state, action) {
+      state.currentCheckoutStep = action.payload
+    },
     setCheckout(state, action) {
       return {...state, ...action.payload}
     },
@@ -48,7 +54,7 @@ const checkoutSlice = createSlice({
     },
     setShippingData(state, {payload}: { payload: ShippingData }) {
       state.shippingData = payload
-    }
+    },
   }
 })
 
@@ -57,6 +63,7 @@ export default checkoutSlice.reducer
 export const {
   incrementCurrentCheckoutStep,
   decrementCurrentCheckoutStep,
+  setCurrentCheckoutStep,
   setCheckout,
   setAccountData,
   setShippingData
